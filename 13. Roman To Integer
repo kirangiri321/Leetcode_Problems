@@ -1,24 +1,22 @@
 class Solution {
-    private:
-    int value(char c){
-        if(c=='I') return 1;
-        if(c=='V') return 5;
-        if(c=='X') return 10;
-        if(c=='L') return 50;
-        if(c=='C') return 100;
-        if(c=='D') return 500;
-        if(c=='M') return 1000;
-        return 0;
-    }
 public:
     int romanToInt(string s) {
         int sum=0;
         int i;
         for(i=0;i<s.length();i++){
-          if(i<s.length()-1 && value(s[i]) < value(s[i+1]))  
-          sum-=value(s[i]);
-          else
-          sum+=value(s[i]);
+        if (s[i] == 'I') sum += 1;
+            if (s[i] == 'V') sum += 5;
+            if (s[i] == 'X') sum += 10;
+            if (s[i] == 'L') sum += 50;
+            if (s[i] == 'C') sum += 100;
+            if (s[i] == 'D') sum += 500;
+            if (s[i] == 'M') sum += 1000;
+
+        if (i > 0) {
+                if ((s[i] == 'V' || s[i] == 'X') && s[i - 1] == 'I') sum -= 2;
+                if ((s[i] == 'L' || s[i] == 'C') && s[i - 1] == 'X') sum -= 20;
+                if ((s[i] == 'D' || s[i] == 'M') && s[i - 1] == 'C') sum -= 200;
+            }
         }
         return sum;
     }
